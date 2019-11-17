@@ -17,7 +17,7 @@ public class CarsListController {
     @Autowired
     CarsListService carsListService;
 
-    @PostMapping(value = "/cars/add")
+    @PostMapping(value = "/cars")
     public void addcars(@RequestParam("image") MultipartFile file, @RequestParam("data") String data) throws IOException {
 
         CarsListBean carslist = new ObjectMapper().readValue(data, CarsListBean.class);
@@ -25,14 +25,14 @@ public class CarsListController {
         carslist.setBookstatus(false);
         carsListService.newdata(carslist);
     }
-    @PostMapping(value = "/cars/updatestatus")
+    @PostMapping(value = "/cars/status")
     public void updatestatus(@RequestBody CarsListBean data) {
 
         data.setBookstatus(true);
         System.out.println(data.toString());
         carsListService.newdata(data);
     }
-    @PostMapping(value = "/cars/getbyavailability")
+    @PostMapping(value = "/cars/availability")
     public List<CarsListBean> getbyavailability(@RequestBody String availability) {
         return carsListService.getcars(availability);
     }

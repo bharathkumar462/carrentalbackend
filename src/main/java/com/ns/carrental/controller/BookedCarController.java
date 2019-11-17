@@ -17,16 +17,17 @@ public class BookedCarController {
     BookedCarsService bookedCarsService;
     @Autowired
     CarsListService carsListService;
-    @PostMapping(value = "/bookcars/add")
+    @PostMapping(value = "/bookcars")
     public void addcars(@RequestBody BookedCarsList bookedCarsList) {
         bookedCarsService.newdata(bookedCarsList);
     }
-    @PostMapping(value = "/cars/bookedcarslist")
+
+    @PostMapping(value = "/admin/carslist")
     public List<CarsListBean> bookedcarslist(@RequestBody long phonenumber) {
        List<CarsListBean> carlist=bookedCarsService.getbookedlist(phonenumber);
     return carlist;
     }
-    @PostMapping(value = "/cars/triplists")
+    @PostMapping(value = "/admin/triplists")
     public List<BookedCarsList> triplist(@RequestBody String numberplate) {
         List<BookedCarsList> carlist=bookedCarsService.getalllist(numberplate);
         return carlist;

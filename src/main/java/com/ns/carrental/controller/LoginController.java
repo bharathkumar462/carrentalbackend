@@ -19,35 +19,40 @@ import java.io.IOException;
 public class LoginController {
     @Autowired
     LoginService loginService;
-   @Autowired
-HttpSession session;
-    @PostMapping(value = "/customers/create")
+    @Autowired
+    HttpSession session;
+
+    @PostMapping(value = "/customers")
     public void createMember(@RequestParam("image") MultipartFile file, @RequestParam("data") String data) throws IOException {
         LoginBean loginBean = new ObjectMapper().readValue(data, LoginBean.class);
         loginBean.setImage(file.getBytes());
         loginService.newdata(loginBean);
     }
+
     @PostMapping(value = "/customers/authenticate")
     public LoginBean checkPassword(@RequestBody LoginBean loginBean) {
 
-        LoginBean result=loginService.findpassword(loginBean);
+        LoginBean result = loginService.findpassword(loginBean);
         return result;
     }
-    @PostMapping(value = "/customers/forgotpassword")
+
+    @PostMapping(value = "/customers/reauthenticate")
     public boolean forgotpassword(@RequestBody LoginBean loginBean) throws Exception {
 
-        boolean result=loginService.forgotpassword(loginBean);
+        boolean result = loginService.forgotpassword(loginBean);
         return result;
     }
+
     @GetMapping(value = "/customers/otpverify/{otp}")
-    public boolean otpverify(@PathVariable int otp){
-      System.out.println(otp);
-        boolean result=loginService.checkotp(otp);
+    public boolean otpverify(@PathVariable int otp) {
+        System.out.println(otp);
+        boolean result = loginService.checkotp(otp);
         return result;
     }
-    @PostMapping(value = "/customers/updatepassword")
+
+    @PostMapping(value = "/customers/password")
     public void updatepassword(@RequestBody LoginBean loginBean) {
-        LoginBean lgnbean=(LoginBean) session.getAttribute("customer");
+        LoginBean lgnbean = (LoginBean) session.getAttribute("customer");
         loginBean.setImage(lgnbean.getImage());
         loginBean.setEmail(lgnbean.getEmail());
         loginService.newdata(loginBean);
