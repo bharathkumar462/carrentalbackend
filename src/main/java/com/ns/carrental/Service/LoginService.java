@@ -1,5 +1,6 @@
 package com.ns.carrental.Service;
 
+import com.ns.carrental.Interfaces.ILoginServiceInterface;
 import com.ns.carrental.Repository.LoginRepo;
 import com.ns.carrental.model.EmailSendingModel;
 import com.ns.carrental.model.LoginBean;
@@ -8,19 +9,22 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 @Service
-public class LoginService {
+public class LoginService implements ILoginServiceInterface {
     public static int otp=0;
     @Autowired
     LoginRepo loginRepo;
+
     @Autowired
     MailSendingService mailSendingService;
+
     @Autowired
     HttpSession session;
-    public LoginBean findpassword(LoginBean login) {
-        LoginBean l = loginRepo.findByPhonenumberAndPassword(login.getPhonenumber(), login.getPassword());
-        return l;
+
+    public Optional<LoginBean> findpassword(LoginBean login)  {
+        return loginRepo.findByPhonenumberAndPassword(login.getPhonenumber(), login.getPassword());
     }
 
     public void newdata(LoginBean reg) {

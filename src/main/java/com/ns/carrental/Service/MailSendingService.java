@@ -1,6 +1,7 @@
 package com.ns.carrental.Service;
 
 
+import com.ns.carrental.Interfaces.IMailSendingService;
 import com.ns.carrental.model.EmailSendingModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
-public class MailSendingService {
+public class MailSendingService implements IMailSendingService {
     @Autowired
     private JavaMailSender javaMailSender;
 

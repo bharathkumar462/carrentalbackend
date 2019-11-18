@@ -1,5 +1,7 @@
 package com.ns.carrental.controller;
 
+import com.ns.carrental.Interfaces.IBookedCarsService;
+import com.ns.carrental.Interfaces.ICarsListService;
 import com.ns.carrental.Service.BookedCarsService;
 import com.ns.carrental.Service.CarsListService;
 import com.ns.carrental.model.BookedCarsList;
@@ -12,11 +14,14 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
+
 public class BookedCarController {
     @Autowired
-    BookedCarsService bookedCarsService;
+    IBookedCarsService bookedCarsService;
+
     @Autowired
-    CarsListService carsListService;
+    ICarsListService carsListService;
+
     @PostMapping(value = "/bookcars")
     public void addcars(@RequestBody BookedCarsList bookedCarsList) {
         bookedCarsService.newdata(bookedCarsList);

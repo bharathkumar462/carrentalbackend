@@ -1,5 +1,6 @@
 package com.ns.carrental.Service;
 
+import com.ns.carrental.Interfaces.IBookedCarsService;
 import com.ns.carrental.Repository.BookedCarsRepo;
 import com.ns.carrental.Repository.CarsListRepo;
 import com.ns.carrental.model.BookedCarsList;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BookedCarsService {
+public class BookedCarsService implements IBookedCarsService {
     @Autowired
     BookedCarsRepo bookedCarsRepo;
     @Autowired

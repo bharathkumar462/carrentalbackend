@@ -1,6 +1,7 @@
 package com.ns.carrental.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ns.carrental.Interfaces.ICarsListService;
 import com.ns.carrental.Service.CarsListService;
 import com.ns.carrental.model.CarsListBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class CarsListController {
     @Autowired
-    CarsListService carsListService;
+    ICarsListService carsListService;
 
     @PostMapping(value = "/cars")
     public void addcars(@RequestParam("image") MultipartFile file, @RequestParam("data") String data) throws IOException {

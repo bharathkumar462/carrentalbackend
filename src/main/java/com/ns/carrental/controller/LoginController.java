@@ -1,8 +1,10 @@
 package com.ns.carrental.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ns.carrental.Interfaces.ILoginServiceInterface;
 import com.ns.carrental.Service.LoginService;
 import com.ns.carrental.Service.MailSendingService;
+import com.ns.carrental.exception.RecordNotFoundException;
 import com.ns.carrental.model.EmailSendingModel;
 import com.ns.carrental.model.LoginBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +14,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class LoginController {
     @Autowired
-    LoginService loginService;
+    ILoginServiceInterface loginService;
+
     @Autowired
     HttpSession session;
 
@@ -30,10 +34,13 @@ public class LoginController {
     }
 
     @PostMapping(value = "/customers/authenticate")
-    public LoginBean checkPassword(@RequestBody LoginBean loginBean) {
+    public LoginBean checkPassword(@RequestBody LoginBean loginBean)throws Exception {
 
-        LoginBean result = loginService.findpassword(loginBean);
-        return result;
+        Optional<LoginBean> result = loginService.findpassword(loginBean);
+        if(result.isPresent())
+            return result.get();
+        else
+            throw new RecordNotFoundException("Username or Password not exist");
     }
 
     @PostMapping(value = "/customers/reauthenticate")
