@@ -16,7 +16,6 @@ public class MailSendingService implements IMailSendingService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-
     public void sendMessage(final EmailSendingModel EmailSendingModel) throws MessagingException {
         MimeMessage messageData = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(messageData, true);

@@ -6,13 +6,13 @@ import java.util.Optional;
 
 public interface ILoginServiceInterface {
 
-    Optional<LoginBean> findpassword(LoginBean login);
+    Optional<LoginBean> findPassword(LoginBean login);
 
-     void newdata(LoginBean reg);
+     void newData(LoginBean reg);
 
-    boolean forgotpassword(LoginBean login)throws Exception;
+    boolean forgotPassword(LoginBean login)throws Exception;
 
      int getRandomInteger(double min, double max);
 
-    boolean checkotp(int userotp);
+    boolean checkOtp(int userotp);
 }

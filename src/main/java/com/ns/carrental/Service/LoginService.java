@@ -2,6 +2,7 @@ package com.ns.carrental.Service;
 
 import com.ns.carrental.Interfaces.ILoginServiceInterface;
 import com.ns.carrental.Repository.LoginRepo;
+import com.ns.carrental.exception.RecordNotFoundException;
 import com.ns.carrental.model.EmailSendingModel;
 import com.ns.carrental.model.LoginBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,22 +24,22 @@ public class LoginService implements ILoginServiceInterface {
     @Autowired
     HttpSession session;
 
-    public Optional<LoginBean> findpassword(LoginBean login)  {
+    public Optional<LoginBean> findPassword(LoginBean login)  {
         return loginRepo.findByPhonenumberAndPassword(login.getPhonenumber(), login.getPassword());
     }
 
-    public void newdata(LoginBean reg) {
+    public void newData(LoginBean reg) {
         reg.setPassword(reg.getRepassword());
         LoginBean r = loginRepo.save(reg);
 
     }
 
-    public boolean forgotpassword(LoginBean login) throws Exception {
-        LoginBean l = loginRepo.findByPhonenumberAndUsername(login.getPhonenumber(), login.getUsername());
-        if (l != null) {
+    public boolean forgotPassword(LoginBean login) throws Exception {
+        Optional<LoginBean> l = loginRepo.findByPhonenumberAndUsername(login.getPhonenumber(), login.getUsername());
+        if (l.isPresent()) {
             session.setAttribute("customer",l);
             EmailSendingModel mail = new EmailSendingModel();
-            String mailAddress = l.getEmail();
+            String mailAddress = l.get().getEmail();
             mail.setFrom("budayakumar@nextsphere.com");
             mail.setTo(mailAddress);
             mail.setSubject("forgot password");
@@ -48,14 +49,14 @@ public class LoginService implements ILoginServiceInterface {
             mailSendingService.sendMessage(mail);
             return true;
         } else {
-            return false;
+            throw new RecordNotFoundException("Username or Password not exist");
         }
     }
     public int getRandomInteger(double min, double max){
         int x = (int)((Math.random()*((max-min)+1))+min);
         return x;
     }
-    public boolean checkotp(int userotp) {
+    public boolean checkOtp(int userotp) {
         if (userotp == otp) {
             otp = 0;
             return true;

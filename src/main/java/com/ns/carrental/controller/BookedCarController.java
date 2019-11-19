@@ -2,6 +2,7 @@ package com.ns.carrental.controller;
 
 import com.ns.carrental.Interfaces.IBookedCarsService;
 import com.ns.carrental.Interfaces.ICarsListService;
+import com.ns.carrental.Repository.CarsListRepo;
 import com.ns.carrental.Service.BookedCarsService;
 import com.ns.carrental.Service.CarsListService;
 import com.ns.carrental.model.BookedCarsList;
@@ -22,24 +23,40 @@ public class BookedCarController {
     @Autowired
     ICarsListService carsListService;
 
+    @Autowired
+    CarsListRepo carsListRepo;
+
     @PostMapping(value = "/bookcars")
-    public void addcars(@RequestBody BookedCarsList bookedCarsList) {
-        bookedCarsService.newdata(bookedCarsList);
+    public void addCars(@RequestBody BookedCarsList bookedCarsList) {
+        bookedCarsService.newData(bookedCarsList);
     }
 
     @PostMapping(value = "/admin/carslist")
-    public List<CarsListBean> bookedcarslist(@RequestBody long phonenumber) {
-       List<CarsListBean> carlist=bookedCarsService.getbookedlist(phonenumber);
-    return carlist;
+    public List<CarsListBean> bookedCarsList(@RequestBody long phonenumber) {
+        List<CarsListBean> carlist = bookedCarsService.getBookedList(phonenumber);
+        return carlist;
     }
+
     @PostMapping(value = "/admin/triplists")
-    public List<BookedCarsList> triplist(@RequestBody String numberplate) {
-        List<BookedCarsList> carlist=bookedCarsService.getalllist(numberplate);
+    public List<BookedCarsList> tripList(@RequestBody String numberplate) {
+        List<BookedCarsList> carlist = bookedCarsService.getAllList(numberplate);
         return carlist;
     }
+
     @PostMapping(value = "/customers/triplists")
-    public List<BookedCarsList> customertriplist(@RequestBody long phonenumber) {
-        List<BookedCarsList> carlist=bookedCarsService.mytrips(phonenumber);
+    public List<BookedCarsList> customerTriplist(@RequestBody long phonenumber) {
+        List<BookedCarsList> carlist = bookedCarsService.myTrips(phonenumber);
         return carlist;
+    }
+
+    @PutMapping(value = "/cars/{numberplate}")
+    public void bookStatus(@PathVariable("numberplate") String numberplate, @RequestBody BookedCarsList bookedCarsList){
+        System.out.println(numberplate);
+        BookedCarsList car=bookedCarsService.tripClose(numberplate);
+        car.setBookstatus(false);
+        bookedCarsService.newData(car);
+      CarsListBean c=carsListRepo.findByNumberplate(numberplate);
+      c.setBookstatus(false);
+      carsListRepo.save(c);
     }
 }

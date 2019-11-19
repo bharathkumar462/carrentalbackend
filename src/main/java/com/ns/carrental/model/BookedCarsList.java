@@ -2,6 +2,7 @@ package com.ns.carrental.model;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "bookedcars")
 public class BookedCarsList {

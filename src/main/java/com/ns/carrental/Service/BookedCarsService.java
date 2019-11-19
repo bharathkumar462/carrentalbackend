@@ -14,22 +14,33 @@ import java.util.List;
 public class BookedCarsService implements IBookedCarsService {
     @Autowired
     BookedCarsRepo bookedCarsRepo;
+
     @Autowired
     CarsListRepo carsListRepo;
-    public void newdata(BookedCarsList reg){
-        BookedCarsList r= bookedCarsRepo.save(reg);
+
+
+    public void newData(BookedCarsList reg) {
+        BookedCarsList r = bookedCarsRepo.save(reg);
+
     }
 
-    public List<CarsListBean> getbookedlist (long phonenumber){
-        List<CarsListBean> r= carsListRepo.findByPhonenumber(phonenumber);
+    public List<CarsListBean> getBookedList(long phonenumber) {
+        List<CarsListBean> r = carsListRepo.findByPhonenumber(phonenumber);
         return r;
     }
-    public List<BookedCarsList> getalllist (String numberplate){
-        List<BookedCarsList> r= bookedCarsRepo.findByNumberplate(numberplate);
+
+    public List<BookedCarsList> getAllList(String numberplate) {
+        List<BookedCarsList> r = bookedCarsRepo.findByNumberplate(numberplate);
         return r;
     }
-    public List<BookedCarsList> mytrips (long phonenumber){
-        List<BookedCarsList> r= bookedCarsRepo.findByPhonenumber(phonenumber);
+
+    public List<BookedCarsList> myTrips(long phonenumber) {
+        List<BookedCarsList> r = bookedCarsRepo.findByPhonenumber(phonenumber);
         return r;
     }
+
+   public BookedCarsList tripClose(String numberplate){
+        BookedCarsList car=bookedCarsRepo.findByNumberplateAndBookstatus(numberplate,true);
+        return car;
+   }
 }

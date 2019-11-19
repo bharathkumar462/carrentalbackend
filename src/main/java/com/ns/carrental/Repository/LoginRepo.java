@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface LoginRepo extends JpaRepository<LoginBean, Long> {
 
     Optional<LoginBean> findByPhonenumberAndPassword(long phonenumber, String password);
-    LoginBean findByPhonenumberAndUsername(long phonenumber,String username);
+    Optional<LoginBean> findByPhonenumberAndUsername(long phonenumber,String username);
 }

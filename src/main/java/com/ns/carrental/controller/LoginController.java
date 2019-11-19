@@ -30,38 +30,39 @@ public class LoginController {
     public void createMember(@RequestParam("image") MultipartFile file, @RequestParam("data") String data) throws IOException {
         LoginBean loginBean = new ObjectMapper().readValue(data, LoginBean.class);
         loginBean.setImage(file.getBytes());
-        loginService.newdata(loginBean);
+        loginService.newData(loginBean);
     }
 
-    @PostMapping(value = "/customers/authenticate")
-    public LoginBean checkPassword(@RequestBody LoginBean loginBean)throws Exception {
 
-        Optional<LoginBean> result = loginService.findpassword(loginBean);
-        if(result.isPresent())
+    @PostMapping(value = "/customers/authenticate")
+    public LoginBean checkPassword(@RequestBody LoginBean loginBean) throws Exception {
+
+        Optional<LoginBean> result = loginService.findPassword(loginBean);
+        if (result.isPresent())
             return result.get();
         else
             throw new RecordNotFoundException("Username or Password not exist");
     }
 
     @PostMapping(value = "/customers/reauthenticate")
-    public boolean forgotpassword(@RequestBody LoginBean loginBean) throws Exception {
+    public boolean forgotPassword(@RequestBody LoginBean loginBean) throws Exception {
 
-        boolean result = loginService.forgotpassword(loginBean);
+        boolean result = loginService.forgotPassword(loginBean);
         return result;
     }
 
     @GetMapping(value = "/customers/otpverify/{otp}")
-    public boolean otpverify(@PathVariable int otp) {
+    public boolean otpVerify(@PathVariable int otp) {
         System.out.println(otp);
-        boolean result = loginService.checkotp(otp);
+        boolean result = loginService.checkOtp(otp);
         return result;
     }
 
     @PostMapping(value = "/customers/password")
-    public void updatepassword(@RequestBody LoginBean loginBean) {
+    public void updatePassword(@RequestBody LoginBean loginBean) {
         LoginBean lgnbean = (LoginBean) session.getAttribute("customer");
         loginBean.setImage(lgnbean.getImage());
         loginBean.setEmail(lgnbean.getEmail());
-        loginService.newdata(loginBean);
+        loginService.newData(loginBean);
     }
 }

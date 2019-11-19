@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ICarsListService {
 
-     void newdata(CarsListBean reg);
+     void newData(CarsListBean reg);
 
-     List<CarsListBean> getcars(String reg);
+     List<CarsListBean> getCars(String reg);
 }

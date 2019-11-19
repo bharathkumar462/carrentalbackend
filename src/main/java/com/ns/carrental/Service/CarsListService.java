@@ -10,13 +10,16 @@ import java.util.List;
 
 @Service
 public class CarsListService implements ICarsListService {
+
     @Autowired
     CarsListRepo carsListRepo;
-    public void newdata(CarsListBean reg){
-        CarsListBean r= carsListRepo.save(reg);
+
+    public void newData(CarsListBean reg) {
+        CarsListBean r = carsListRepo.save(reg);
     }
-    public List<CarsListBean> getcars(String reg){
-        List<CarsListBean> r= carsListRepo.findByAvailability(reg);
+
+    public List<CarsListBean> getCars(String reg) {
+        List<CarsListBean> r = carsListRepo.findByAvailability(reg);
         return r;
     }
 }

@@ -8,5 +8,5 @@ import java.util.List;
 public interface CarsListRepo extends JpaRepository<CarsListBean, Long> {
         List<CarsListBean> findByAvailability(String availability);
         List<CarsListBean> findByPhonenumber(long phonenumber);
-
+        CarsListBean findByNumberplate(String numberplate);
 }
