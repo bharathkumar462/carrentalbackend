@@ -11,4 +11,5 @@ public interface LoginRepo extends JpaRepository<LoginBean, Long> {
 
     Optional<LoginBean> findByPhonenumberAndPassword(long phonenumber, String password);
     Optional<LoginBean> findByPhonenumberAndUsername(long phonenumber,String username);
+    Optional<LoginBean> findByPhonenumber(long phonenumber);
 }
