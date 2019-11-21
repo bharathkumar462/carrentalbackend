@@ -25,22 +25,18 @@ public class BookedCarsService implements IBookedCarsService {
     }
 
     public List<CarsListBean> getBookedList(long phonenumber) {
-        List<CarsListBean> r = carsListRepo.findByPhonenumber(phonenumber);
-        return r;
+        return carsListRepo.findByPhonenumber(phonenumber);
     }
 
     public List<BookedCarsList> getAllList(String numberplate) {
-        List<BookedCarsList> r = bookedCarsRepo.findByNumberplate(numberplate);
-        return r;
+        return bookedCarsRepo.findByNumberplate(numberplate);
     }
 
     public List<BookedCarsList> myTrips(long phonenumber) {
-        List<BookedCarsList> r = bookedCarsRepo.findByPhonenumber(phonenumber);
-        return r;
+        return bookedCarsRepo.findByPhonenumber(phonenumber);
     }
 
    public BookedCarsList tripClose(String numberplate){
-        BookedCarsList car=bookedCarsRepo.findByNumberplateAndBookstatus(numberplate,true);
-        return car;
+       return bookedCarsRepo.findByNumberplateAndBookstatus(numberplate,true);
    }
 }

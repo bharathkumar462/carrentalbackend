@@ -19,7 +19,6 @@ public class CarsListService implements ICarsListService {
     }
 
     public List<CarsListBean> getCars(String reg) {
-        List<CarsListBean> r = carsListRepo.findByAvailability(reg);
-        return r;
+        return carsListRepo.findByAvailability(reg);
     }
 }

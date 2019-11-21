@@ -33,30 +33,27 @@ public class BookedCarController {
 
     @PostMapping(value = "/admin/carslist")
     public List<CarsListBean> bookedCarsList(@RequestBody long phonenumber) {
-        List<CarsListBean> carlist = bookedCarsService.getBookedList(phonenumber);
-        return carlist;
+        return bookedCarsService.getBookedList(phonenumber);
+
     }
 
     @PostMapping(value = "/admin/triplists")
     public List<BookedCarsList> tripList(@RequestBody String numberplate) {
-        List<BookedCarsList> carlist = bookedCarsService.getAllList(numberplate);
-        return carlist;
+        return bookedCarsService.getAllList(numberplate);
     }
 
     @PostMapping(value = "/customers/triplists")
     public List<BookedCarsList> customerTriplist(@RequestBody long phonenumber) {
-        List<BookedCarsList> carlist = bookedCarsService.myTrips(phonenumber);
-        return carlist;
+        return bookedCarsService.myTrips(phonenumber);
     }
 
     @PutMapping(value = "/cars/{numberplate}")
-    public void bookStatus(@PathVariable("numberplate") String numberplate, @RequestBody BookedCarsList bookedCarsList){
-        System.out.println(numberplate);
-        BookedCarsList car=bookedCarsService.tripClose(numberplate);
+    public void bookStatus(@PathVariable("numberplate") String numberplate, @RequestBody BookedCarsList bookedCarsList) {
+        BookedCarsList car = bookedCarsService.tripClose(numberplate);
         car.setBookstatus(false);
         bookedCarsService.newData(car);
-      CarsListBean c=carsListRepo.findByNumberplate(numberplate);
-      c.setBookstatus(false);
-      carsListRepo.save(c);
+        CarsListBean c = carsListRepo.findByNumberplate(numberplate);
+        c.setBookstatus(false);
+        carsListRepo.save(c);
     }
 }

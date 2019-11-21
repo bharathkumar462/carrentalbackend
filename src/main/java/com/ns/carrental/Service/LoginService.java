@@ -30,8 +30,7 @@ public class LoginService implements ILoginServiceInterface {
 
     public void newData(LoginBean reg) {
         reg.setPassword(reg.getRepassword());
-        LoginBean r = loginRepo.save(reg);
-
+        loginRepo.save(reg);
     }
 
     public boolean forgotPassword(LoginBean login) throws Exception {
@@ -52,10 +51,12 @@ public class LoginService implements ILoginServiceInterface {
             throw new RecordNotFoundException("Username or Password not exist");
         }
     }
+
     public int getRandomInteger(double min, double max){
         int x = (int)((Math.random()*((max-min)+1))+min);
         return x;
     }
+
     public boolean checkOtp(int userotp) {
         if (userotp == otp) {
             otp = 0;

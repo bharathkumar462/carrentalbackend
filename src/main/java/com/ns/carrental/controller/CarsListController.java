@@ -42,9 +42,7 @@ public class CarsListController {
 
     @PostMapping(value = "/cars/status")
     public void updateStatus(@RequestBody CarsListBean data) {
-
         data.setBookstatus(true);
-        System.out.println(data.toString());
         carsListService.newData(data);
     }
 

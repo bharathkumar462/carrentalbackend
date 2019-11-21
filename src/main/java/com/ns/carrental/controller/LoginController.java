@@ -62,8 +62,7 @@ public class LoginController {
     @GetMapping(value = "/customers/{otp}")
     public boolean otpVerify(@PathVariable int otp) {
         System.out.println(otp);
-        boolean result = loginService.checkOtp(otp);
-        return result;
+        return loginService.checkOtp(otp);
     }
 
     @PostMapping(value = "/customers/password")
