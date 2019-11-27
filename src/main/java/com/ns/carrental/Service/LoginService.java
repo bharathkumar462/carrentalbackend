@@ -29,16 +29,15 @@ public class LoginService implements ILoginServiceInterface {
     }
 
     public void newData(LoginBean reg) {
-        reg.setPassword(reg.getRepassword());
         loginRepo.save(reg);
     }
 
     public boolean forgotPassword(LoginBean login) throws Exception {
-        Optional<LoginBean> l = loginRepo.findByPhonenumberAndUsername(login.getPhonenumber(), login.getUsername());
-        if (l.isPresent()) {
-            session.setAttribute("customer",l);
+        Optional<LoginBean> loginBean = loginRepo.findByPhonenumberAndUsername(login.getPhonenumber(), login.getUsername());
+        if (loginBean.isPresent()) {
+            session.setAttribute("customer",loginBean);
             EmailSendingModel mail = new EmailSendingModel();
-            String mailAddress = l.get().getEmail();
+            String mailAddress = loginBean.get().getEmail();
             mail.setFrom("budayakumar@nextsphere.com");
             mail.setTo(mailAddress);
             mail.setSubject("forgot password");

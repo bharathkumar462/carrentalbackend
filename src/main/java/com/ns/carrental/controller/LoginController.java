@@ -54,22 +54,19 @@ public class LoginController {
 
     @PostMapping(value = "/customers/reauthenticate")
     public boolean forgotPassword(@RequestBody LoginBean loginBean) throws Exception {
-
-        boolean result = loginService.forgotPassword(loginBean);
-        return result;
+        return loginService.forgotPassword(loginBean);
     }
 
     @GetMapping(value = "/customers/{otp}")
     public boolean otpVerify(@PathVariable int otp) {
-        System.out.println(otp);
         return loginService.checkOtp(otp);
     }
 
     @PostMapping(value = "/customers/password")
     public void updatePassword(@RequestBody LoginBean loginBean) {
-        LoginBean lgnbean = (LoginBean) session.getAttribute("customer");
-        loginBean.setImage(lgnbean.getImage());
-        loginBean.setEmail(lgnbean.getEmail());
+        Optional<LoginBean> lgnbean = loginRepo.findByPhonenumberAndUsername(loginBean.getPhonenumber(),loginBean.getUsername());
+        loginBean.setImage(lgnbean.get().getImage());
+        loginBean.setEmail(lgnbean.get().getEmail());
         loginService.newData(loginBean);
     }
 }

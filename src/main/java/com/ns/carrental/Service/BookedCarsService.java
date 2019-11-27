@@ -20,8 +20,7 @@ public class BookedCarsService implements IBookedCarsService {
 
 
     public void newData(BookedCarsList reg) {
-        BookedCarsList r = bookedCarsRepo.save(reg);
-
+        bookedCarsRepo.save(reg);
     }
 
     public List<CarsListBean> getBookedList(long phonenumber) {
