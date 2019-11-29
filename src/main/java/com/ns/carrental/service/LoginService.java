@@ -1,7 +1,7 @@
-package com.ns.carrental.Service;
+package com.ns.carrental.service;
 
-import com.ns.carrental.Interfaces.ILoginServiceInterface;
-import com.ns.carrental.Repository.LoginRepo;
+import com.ns.carrental.interfaces.ILoginServiceInterface;
+import com.ns.carrental.repository.LoginRepo;
 import com.ns.carrental.exception.RecordNotFoundException;
 import com.ns.carrental.model.EmailSendingModel;
 import com.ns.carrental.model.LoginBean;

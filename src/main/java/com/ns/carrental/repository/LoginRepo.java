@@ -1,4 +1,4 @@
-package com.ns.carrental.Repository;
+package com.ns.carrental.repository;
 
 import com.ns.carrental.model.LoginBean;
 import org.springframework.data.jpa.repository.JpaRepository;

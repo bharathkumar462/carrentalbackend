@@ -1,7 +1,7 @@
-package com.ns.carrental.Service;
+package com.ns.carrental.service;
 
 
-import com.ns.carrental.Interfaces.IMailSendingService;
+import com.ns.carrental.interfaces.IMailSendingService;
 import com.ns.carrental.model.EmailSendingModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

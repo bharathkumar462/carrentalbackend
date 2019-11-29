@@ -1,8 +1,8 @@
 package com.ns.carrental.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ns.carrental.Interfaces.ILoginServiceInterface;
-import com.ns.carrental.Repository.LoginRepo;
+import com.ns.carrental.interfaces.ILoginServiceInterface;
+import com.ns.carrental.repository.LoginRepo;
 import com.ns.carrental.exception.ImageOverSizeException;
 import com.ns.carrental.exception.RecordExistException;
 import com.ns.carrental.exception.RecordNotFoundException;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -52,7 +51,7 @@ public class LoginController {
             throw new RecordNotFoundException("Username or Password not exist");
     }
 
-    @PostMapping(value = "/customers/reauthenticate")
+    @PostMapping(value = "/customers/re-authenticate")
     public boolean forgotPassword(@RequestBody LoginBean loginBean) throws Exception {
         return loginService.forgotPassword(loginBean);
     }

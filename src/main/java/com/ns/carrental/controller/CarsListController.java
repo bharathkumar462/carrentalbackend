@@ -1,8 +1,8 @@
 package com.ns.carrental.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ns.carrental.Interfaces.ICarsListService;
-import com.ns.carrental.Repository.CarsListRepo;
+import com.ns.carrental.interfaces.ICarsListService;
+import com.ns.carrental.repository.CarsListRepo;
 import com.ns.carrental.exception.ImageOverSizeException;
 import com.ns.carrental.exception.RecordExistException;
 import com.ns.carrental.model.CarsListBean;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")

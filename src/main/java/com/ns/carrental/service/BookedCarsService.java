@@ -1,8 +1,8 @@
-package com.ns.carrental.Service;
+package com.ns.carrental.service;
 
-import com.ns.carrental.Interfaces.IBookedCarsService;
-import com.ns.carrental.Repository.BookedCarsRepo;
-import com.ns.carrental.Repository.CarsListRepo;
+import com.ns.carrental.interfaces.IBookedCarsService;
+import com.ns.carrental.repository.BookedCarsRepo;
+import com.ns.carrental.repository.CarsListRepo;
 import com.ns.carrental.model.BookedCarsList;
 import com.ns.carrental.model.CarsListBean;
 import org.springframework.beans.factory.annotation.Autowired;

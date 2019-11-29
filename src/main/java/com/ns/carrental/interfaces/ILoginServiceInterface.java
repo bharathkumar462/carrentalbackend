@@ -1,4 +1,4 @@
-package com.ns.carrental.Interfaces;
+package com.ns.carrental.interfaces;
 
 import com.ns.carrental.model.LoginBean;
 

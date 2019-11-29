@@ -1,10 +1,8 @@
 package com.ns.carrental.controller;
 
-import com.ns.carrental.Interfaces.IBookedCarsService;
-import com.ns.carrental.Interfaces.ICarsListService;
-import com.ns.carrental.Repository.CarsListRepo;
-import com.ns.carrental.Service.BookedCarsService;
-import com.ns.carrental.Service.CarsListService;
+import com.ns.carrental.interfaces.IBookedCarsService;
+import com.ns.carrental.interfaces.ICarsListService;
+import com.ns.carrental.repository.CarsListRepo;
 import com.ns.carrental.model.BookedCarsList;
 import com.ns.carrental.model.CarsListBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,23 +24,23 @@ public class BookedCarController {
     @Autowired
     CarsListRepo carsListRepo;
 
-    @PostMapping(value = "/bookcars")
+    @PostMapping(value = "/book-cars")
     public void addCars(@RequestBody BookedCarsList bookedCarsList) {
         bookedCarsService.newData(bookedCarsList);
     }
 
-    @PostMapping(value = "/admin/carslist")
+    @PostMapping(value = "/admin/cars-list")
     public List<CarsListBean> bookedCarsList(@RequestBody long phonenumber) {
         return bookedCarsService.getBookedList(phonenumber);
 
     }
 
-    @PostMapping(value = "/admin/triplists")
+    @PostMapping(value = "/admin/trip-lists")
     public List<BookedCarsList> tripList(@RequestBody String numberplate) {
         return bookedCarsService.getAllList(numberplate);
     }
 
-    @PostMapping(value = "/customers/triplists")
+    @PostMapping(value = "/customers/trip-lists")
     public List<BookedCarsList> customerTriplist(@RequestBody long phonenumber) {
         return bookedCarsService.myTrips(phonenumber);
     }
